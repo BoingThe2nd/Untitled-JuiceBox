@@ -18,6 +18,7 @@ public class PlayerInputDriver : MonoBehaviour
     //private bool _jump; Will not being using Jump But use as reference for other input bases
     //[SerializeField] public float jumpSpeed = 6f;
     [SerializeField] public float speed = 8f;
+    [SerializeField] public float gravity = -9.8f;
     // Start is called before the first frame update
 
     void Start()
@@ -41,6 +42,7 @@ public class PlayerInputDriver : MonoBehaviour
             //    _jump = false;
             //}
         }
+        m_MoveDirection.y += gravity * Time.deltaTime;
         m_CharacterController.Move(m_MoveDirection * Time.deltaTime);
     }
 
