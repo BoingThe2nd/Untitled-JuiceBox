@@ -9,7 +9,7 @@ public class SpriteManager_Individual : MonoBehaviour
 
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         transform.rotation = Quaternion.Euler(SetRotation);
     }

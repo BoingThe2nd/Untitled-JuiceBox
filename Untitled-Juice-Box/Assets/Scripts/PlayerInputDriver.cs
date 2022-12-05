@@ -36,6 +36,7 @@ public class PlayerInputDriver : MonoBehaviour
             m_MoveDirection = new Vector3(m_MoveInput.x, 0.0f, m_MoveInput.y);
             m_MoveDirection *= speed;
 
+
             //if (_jump)
             //{
             //    _moveDirection.y = jumpSpeed;
@@ -52,6 +53,28 @@ public class PlayerInputDriver : MonoBehaviour
         //if (!base.IsOwner)
         //    return;
         m_MoveInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        Vector3 NextDir = new Vector3(context.ReadValue<Vector2>().x, 0, context.ReadValue<Vector2>().y);
+        switch (GetComponent<PlayerInput>().currentControlScheme)
+        {
+            case ("Keyboard&Mouse"):
+                Ray ray = FindObjectOfType<Camera>().ScreenPointToRay(context.ReadValue<Vector2>());
+                if (Physics.Raycast(ray: ray, hitInfo: out RaycastHit hit) && hit.collider)
+                {
+                    Debug.DrawLine(transform.position, new Vector3(hit.point.x, 0, hit.point.z), Color.cyan, 1f);
+                    NextDir = hit.point - transform.position;
+                }             
+                break;
+            default:
+                break;
+        }
+        if (NextDir != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(NextDir);
+        }
     }
     //public void OnJump(InputAction.CallbackContext context)
     //{
