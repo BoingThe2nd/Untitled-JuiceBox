@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8417319066674055805}
   - component: {fileID: 5021461205125214736}
   - component: {fileID: 3306503854496195636}
+  - component: {fileID: 7278327167788117932}
+  - component: {fileID: 5819180544340199937}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -111,7 +113,43 @@ MonoBehaviour:
     m_ActionId: f44f3d38-11f8-4bc4-b941-b29acf7c6a77
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5021461205125214736}
+        m_TargetAssemblyTypeName: PlayerInputDriver, Assembly-CSharp
+        m_MethodName: OnShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3306503854496195636}
+        m_TargetAssemblyTypeName: GeneralShoot, Assembly-CSharp
+        m_MethodName: ToggleShoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5819180544340199937}
+        m_TargetAssemblyTypeName: PlayerBuild, Assembly-CSharp
+        m_MethodName: TryPickPlace
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b49726e1-3ac0-4437-9fc5-5bb159db1152
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
@@ -186,6 +224,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f62ec9d1463fcb4298192fdd26bc264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JuiceShot: {fileID: 7070729169806071297, guid: 993dbbcfe611f1f47918601cb7499142, type: 3}
+  ShotCooldown: 0.25
+  ShotSpeed: 1
+  ShotDamage: 0
+  AbleToShoot: 1
+  Shooting: 0
+--- !u!114 &7278327167788117932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604929614899832287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f1c304c3b1b82c4cad12ded051ab5bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 2
+  ShotCoolDown: 0.35
+  ShotSpeed: 4
+  ShotDamage: 1
+--- !u!114 &5819180544340199937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604929614899832287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1d2cc9c9a304945b5fdff735bac5b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  ItemLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  HeldObject: {fileID: 0}
 --- !u!1 &8074102199327377237
 GameObject:
   m_ObjectHideFlags: 0

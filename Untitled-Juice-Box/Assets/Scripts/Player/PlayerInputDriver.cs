@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(PlayerStats))]
 public class PlayerInputDriver : MonoBehaviour
 {
 
     public enum PlayerNumber {One, Two, Three, Four }
     public PlayerNumber m_PlayerNumber;
+
+
+    PlayerStats m_Stats;
 
     //This is the Post Removal of Fish-Net Script
     private CharacterController m_CharacterController;
@@ -24,6 +29,11 @@ public class PlayerInputDriver : MonoBehaviour
     void Start()
     {
         m_CharacterController = GetComponent(typeof(CharacterController)) as CharacterController;
+        m_Stats = GetComponent<PlayerStats>();
+
+        speed = m_Stats.MoveSpeed;
+ 
+
     }
 
     // Update is called once per frame
@@ -45,6 +55,8 @@ public class PlayerInputDriver : MonoBehaviour
         }
         m_MoveDirection.y += gravity * Time.deltaTime;
         m_CharacterController.Move(m_MoveDirection * Time.deltaTime);
+
+
     }
 
     #region UnityEventCallbacks
@@ -73,8 +85,26 @@ public class PlayerInputDriver : MonoBehaviour
         }
         if (NextDir != Vector3.zero)
         {
+
             transform.rotation = Quaternion.LookRotation(NextDir);
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+
         }
+    }
+
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        //This is to activate the ReToggle specifically for player Input Turn
+        if (context.action.phase == InputActionPhase.Performed)
+        {
+            GetComponent<GeneralShoot>().ToggleShoot();
+        }
+        
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+
     }
     //public void OnJump(InputAction.CallbackContext context)
     //{
